@@ -4,12 +4,23 @@
  */
 package jumuorigin;
 
+import java.awt.List;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Map;
+import java.util.Random;
+import javax.swing.JLabel;
 
 /**
  *
  * @author julia
  */
+
+
+
 public class SELECCION extends javax.swing.JFrame {
 
     public SELECCION(String puntoPartida, String destino, Map<String, String> abreviaturas) {
@@ -28,12 +39,38 @@ public class SELECCION extends javax.swing.JFrame {
         jLabel22.setText(abreviaturaDestino);
         jLabel30.setText(abreviaturaDestino);
 
+        // Crear un generador de números aleatorios
+        Random random = new Random();
+
+        // Crear un array de JLabels para los despegues y otro para los aterrizajes
+        JLabel[] despegues = {jLabel7, jLabel15, jLabel23, jLabel31};
+        JLabel[] aterrizajes = {jLabel8, jLabel16, jLabel24, jLabel32};
+
+        // Para cada vuelo
+        for (int i = 0; i < 4; i++) {
+            // Generar una hora de despegue aleatoria
+            LocalTime despegue = LocalTime.of(random.nextInt(24), random.nextInt(60));
+
+            // Establecer la hora de despegue en el JLabel de despegue correspondiente
+            despegues[i].setText(despegue.toString());
+
+            // Generar un tiempo de vuelo aleatorio entre 45 y 80 minutos
+            int tiempoVuelo = 45 + random.nextInt(36);
+
+            // Agregar el tiempo de vuelo para obtener la hora de aterrizaje
+            LocalTime aterrizaje = despegue.plus(tiempoVuelo, ChronoUnit.MINUTES);
+
+            // Establecer la hora de aterrizaje en el JLabel de aterrizaje correspondiente
+            aterrizajes[i].setText(aterrizaje.toString());
+        }
+    
+
+
     }
 
     public SELECCION() {
         initComponents();
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -100,6 +137,11 @@ public class SELECCION extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jumuorigin/imagen/home (1).png"))); // NOI18N
         jButton1.setToolTipText("");
         jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jumuorigin/imagen/logo (2).png"))); // NOI18N
 
@@ -502,6 +544,13 @@ public class SELECCION extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        PRINCIPAL newframe = new PRINCIPAL();
+        newframe.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
