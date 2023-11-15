@@ -7,7 +7,10 @@ package jumuorigin;
 import javax.swing.JTextField;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 
 
 /**
@@ -242,7 +245,22 @@ public class CREARCUENTA extends javax.swing.JFrame {
         String fechaNacimiento = ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText();
         String genero = jComboBox1.getSelectedItem().toString();
 
-        String data = nombre + "," + apellidos + "," + correo + "," + contrasena + "," + telefono + "," + fechaNacimiento + "," + genero + "\n";
+        int contador = 0;
+        File fileDatos = new File("datos.csv");
+        if (fileDatos.exists() && !fileDatos.isDirectory()) {
+            try {
+                Scanner scanner = new Scanner(fileDatos);
+                while (scanner.hasNextLine()) {
+                    scanner.nextLine();
+                    contador++;
+                }
+                scanner.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        String data = (contador + 1) + "," + nombre + "," + apellidos + "," + correo + "," + contrasena + "," + telefono + "," + fechaNacimiento + "," + genero + "\n";
 
         try {
             FileWriter fw = new FileWriter("datos.csv", true);
@@ -252,7 +270,7 @@ public class CREARCUENTA extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-                     
+      
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed

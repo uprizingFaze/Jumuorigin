@@ -214,7 +214,7 @@ public class INICIARSESION extends javax.swing.JFrame {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts[2].equals(correo) && parts[3].equals(contrasena)) {
+                if (parts[3].equals(correo) && parts[4].equals(contrasena)) {
                     // Iniciar sesión
                     JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
                     return;
