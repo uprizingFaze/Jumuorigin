@@ -4,36 +4,18 @@
  */
 package jumuorigin;
 
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
 import javax.swing.JOptionPane;
+/**
 
 /**
  *
  * @author julia
  */
 public class INICIARSESION extends javax.swing.JFrame {
-    private String correo;
 
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-    private String contrasena;
-
-    public INICIARSESION(String correo, String contrasena) {
-        this.correo = correo;
-        this.contrasena = contrasena;
-    }
     
     
     
@@ -223,15 +205,25 @@ public class INICIARSESION extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String usuarioIngresado = jTextField1.getText();
-        String contrasenaIngresada = jTextField2.getText();
-        
-        if (usuarioIngresado.equals(correo)&& contrasenaIngresada.equals(contrasena)){
-            PRINCIPAL newframe = new PRINCIPAL();
-            newframe.setVisible(true);
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "usuario y/o contrasena incorrecta", "Error!", JOptionPane.ERROR_MESSAGE);
+        // TODO add your handling code here:
+        String correo = jTextField1.getText();
+        String contrasena = jTextField2.getText();
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("datos.csv"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts[2].equals(correo) && parts[3].equals(contrasena)) {
+                    // Iniciar sesión
+                    JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
+                    return;
+                }
+            }
+            // Si llegamos aquí, el inicio de sesión ha fallado
+            JOptionPane.showMessageDialog(null, "Error de inicio de sesión");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
