@@ -41,6 +41,52 @@ public class PRINCIPAL extends javax.swing.JFrame {
     private String destino;
     private String claseVuelo;
     private Date fecha;
+    
+    
+    
+    public class DatosVuelo {
+
+        private String puntoPartida;
+        private String destino;
+        private String claseVuelo;
+        private Date fecha;
+        // Agrega aquí cualquier otro dato que necesites almacenar
+
+        // Métodos getter y setter para cada variable
+
+        public String getPuntoPartida() {
+            return puntoPartida;
+        }
+
+        public void setPuntoPartida(String puntoPartida) {
+            this.puntoPartida = puntoPartida;
+        }
+
+        public String getDestino() {
+            return destino;
+        }
+
+        public void setDestino(String destino) {
+            this.destino = destino;
+        }
+
+        public String getClaseVuelo() {
+            return claseVuelo;
+        }
+
+        public void setClaseVuelo(String claseVuelo) {
+            this.claseVuelo = claseVuelo;
+        }
+
+        public Date getFecha() {
+            return fecha;
+        }
+
+        public void setFecha(Date fecha) {
+            this.fecha = fecha;
+        }
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -267,9 +313,14 @@ public class PRINCIPAL extends javax.swing.JFrame {
         newframe.setVisible(true);
         this.dispose();
 
-            // Instanciar la clase SELECCION y pasar los valores de punto de partida y destino, y el mapa de abreviaturas
-    SELECCION seleccion = new SELECCION(puntoPartida, destino, abreviaturas);
-    seleccion.setVisible(true);
+        // Instanciar la clase SELECCION y pasar los valores de punto de partida y destino, y el mapa de abreviaturas
+        SELECCION seleccion = new SELECCION(puntoPartida, destino, abreviaturas);
+        seleccion.setVisible(true);
+        DatosVuelo datosVuelo = new DatosVuelo();
+        datosVuelo.setPuntoPartida(jComboBox1.getSelectedItem().toString());
+        datosVuelo.setDestino(jComboBox2.getSelectedItem().toString());
+        datosVuelo.setClaseVuelo(jComboBox3.getSelectedItem().toString());
+        datosVuelo.setFecha(jDateChooser2.getDate());
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
