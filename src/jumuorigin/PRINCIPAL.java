@@ -4,6 +4,8 @@
  */
 package jumuorigin;
 
+import java.util.Date;
+
 /**
  *
  * @author julia
@@ -21,8 +23,11 @@ public class PRINCIPAL extends javax.swing.JFrame {
         initComponents();
         jLabel7.setText(nombreUsuario);
     }
+    private String puntoPartida;
+    private String destino;
+    private String claseVuelo;
+    private Date fecha;
 
- 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -225,6 +230,14 @@ public class PRINCIPAL extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+        puntoPartida = jComboBox1.getSelectedItem().toString();
+        destino = jComboBox2.getSelectedItem().toString();
+        claseVuelo = jComboBox3.getSelectedItem().toString();
+        fecha = jDateChooser2.getDate();
+        
+        SELECCION newframe = new SELECCION();
+        newframe.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
