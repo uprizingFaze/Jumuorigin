@@ -4,18 +4,36 @@
  */
 package jumuorigin;
 
+import java.util.Map;
+
 /**
  *
  * @author julia
  */
 public class SELECCION extends javax.swing.JFrame {
 
-    /**
-     * Creates new form COMPRAVUELO
-     */
+    public SELECCION(String puntoPartida, String destino, Map<String, String> abreviaturas) {
+        initComponents();
+        // Usar el mapa para obtener las abreviaturas correspondientes
+        String abreviaturaPuntoPartida = abreviaturas.get(puntoPartida);
+        String abreviaturaDestino = abreviaturas.get(destino);
+        // Establecer el texto de los JLabels con las abreviaturas
+        jLabel4.setText(abreviaturaPuntoPartida);
+        jLabel12.setText(abreviaturaPuntoPartida);
+        jLabel20.setText(abreviaturaPuntoPartida);
+        jLabel28.setText(abreviaturaPuntoPartida);
+
+        jLabel6.setText(abreviaturaDestino);
+        jLabel14.setText(abreviaturaDestino);
+        jLabel22.setText(abreviaturaDestino);
+        jLabel30.setText(abreviaturaDestino);
+
+    }
+
     public SELECCION() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -120,7 +138,7 @@ public class SELECCION extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jumuorigin/imagen/transferir (1) (1).png"))); // NOI18N
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("destino");
+        jLabel6.setText("ciudad arrranca");
 
         jLabel7.setText("hora arranca");
 

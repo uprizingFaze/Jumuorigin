@@ -5,6 +5,8 @@
 package jumuorigin;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -12,14 +14,26 @@ import java.util.Date;
  */
 public class PRINCIPAL extends javax.swing.JFrame {
 
+    // Declarar el mapa como una variable de instancia
+    private Map<String, String> abreviaturas;
+
     /**
      * Creates new form PRINCIPAL
      */
     public PRINCIPAL() {
         initComponents();
+
+        // Inicializar el mapa en el constructor
+        abreviaturas = new HashMap<>();
+        abreviaturas.put("BOGOTA", "BOG");
+        abreviaturas.put("MEDELLIN", "MED");
+        abreviaturas.put("SANTA MARTA", "STM");
+        abreviaturas.put("CALI", "CAL");
+        abreviaturas.put("CARTAGENA", "CRG");
+        // ...añadir más ciudades y abreviaturas aquí...
     }
-    
-     public PRINCIPAL(String nombreUsuario) {
+
+    public PRINCIPAL(String nombreUsuario) {
         initComponents();
         jLabel7.setText(nombreUsuario);
     }
@@ -27,7 +41,6 @@ public class PRINCIPAL extends javax.swing.JFrame {
     private String destino;
     private String claseVuelo;
     private Date fecha;
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -143,15 +156,30 @@ public class PRINCIPAL extends javax.swing.JFrame {
         jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 103, 41));
 
         jComboBox1.setBackground(new java.awt.Color(0, 102, 102));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "BOGOTÁ D.C. (BOG)", "MEDELLIN (MDE)", "SANTA MARTA", "CALI (CLO)", "CARTAGENA" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "BOGOTA", "MEDELLIN", "SANTA MARTA", "CALI", "CARTAGENA" }));
         jComboBox1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jComboBox1.setName("PUNTOINICIAL"); // NOI18N
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
         jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 77, 339, -1));
 
         jComboBox2.setBackground(new java.awt.Color(0, 102, 102));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "BOGOTÁ D.C. (BOG)", "MEDELLIN (MDE)", "SANTA MARTA", "CALI (CLO)", "CARTAGENA" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "BOGOTA", "MEDELLIN", "SANTA MARTA", "CALI", "CARTAGENA" }));
         jComboBox2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jComboBox2.setName("DESTINOINICIAL"); // NOI18N
+        jComboBox2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox2ItemStateChanged(evt);
+            }
+        });
         jPanel3.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 121, 339, -1));
 
         jLabel4.setText("CLASE");
@@ -234,11 +262,46 @@ public class PRINCIPAL extends javax.swing.JFrame {
         destino = jComboBox2.getSelectedItem().toString();
         claseVuelo = jComboBox3.getSelectedItem().toString();
         fecha = jDateChooser2.getDate();
-        
+
         SELECCION newframe = new SELECCION();
         newframe.setVisible(true);
         this.dispose();
+
+            // Instanciar la clase SELECCION y pasar los valores de punto de partida y destino, y el mapa de abreviaturas
+    SELECCION seleccion = new SELECCION(puntoPartida, destino, abreviaturas);
+    seleccion.setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+            String selectedItem = (String) evt.getItem();
+            for (int i = 0; i < jComboBox2.getItemCount(); i++) {
+                if (jComboBox2.getItemAt(i).equals(selectedItem)) {
+                    jComboBox2.removeItemAt(i);
+                    break;
+                }
+            }
+        }
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+            String selectedItem = (String) evt.getItem();
+            for (int i = 0; i < jComboBox1.getItemCount(); i++) {
+                if (jComboBox1.getItemAt(i).equals(selectedItem)) {
+                    jComboBox1.removeItemAt(i);
+                    break;
+                }
+            }
+        }
+    }//GEN-LAST:event_jComboBox2ItemStateChanged
 
     /**
      * @param args the command line arguments
