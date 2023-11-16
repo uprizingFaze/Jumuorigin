@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import jumuorigin.PRINCIPAL.datosVuelo;
 
 /**
@@ -31,8 +30,87 @@ public class SELECCION extends javax.swing.JFrame {
         // Crear una instancia de PRINCIPAL
         PRINCIPAL principal = new PRINCIPAL();
 
-        // Crear una instancia de datosVuelo
-        PRINCIPAL.datosVuelo datosVueloInstance = principal.crearDatosVuelo();
+        // Inicializar datosVueloInstance
+        datosVueloInstance = principal.crearDatosVuelo();
+
+        jButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtener los datos de los JLabels
+                String horaDespegue = jLabel7.getText();
+                String aterrizaje = jLabel8.getText();
+                String precio = jLabel11.getText();
+
+                // Almacenar los datos en la instancia de datosVuelo
+                datosVueloInstance.setHoraDespegue(horaDespegue);
+                datosVueloInstance.setAterrizaje(aterrizaje);
+                datosVueloInstance.setPrecio(precio);
+
+                // Imprimir los datos
+                System.out.println("Hora de despegue: " + datosVueloInstance.getHoraDespegue());
+                System.out.println("Hora de aterrizaje: " + datosVueloInstance.getAterrizaje());
+                System.out.println("Precio: " + datosVueloInstance.getPrecio());
+            }
+        });
+
+        jButton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtener los datos de los JLabels
+                String horaDespegue = jLabel15.getText();
+                String aterrizaje = jLabel16.getText();
+                String precio = jLabel19.getText();
+
+                // Almacenar los datos en la instancia de datosVuelo
+                datosVueloInstance.setHoraDespegue(horaDespegue);
+                datosVueloInstance.setAterrizaje(aterrizaje);
+                datosVueloInstance.setPrecio(precio);
+
+                // Imprimir los datos
+                System.out.println("Hora de despegue: " + datosVueloInstance.getHoraDespegue());
+                System.out.println("Hora de aterrizaje: " + datosVueloInstance.getAterrizaje());
+                System.out.println("Precio: " + datosVueloInstance.getPrecio());
+            }
+        });
+
+        jButton4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtener los datos de los JLabels
+                String horaDespegue = jLabel23.getText();
+                String aterrizaje = jLabel24.getText();
+                String precio = jLabel27.getText();
+
+                // Almacenar los datos en la instancia de datosVuelo
+                datosVueloInstance.setHoraDespegue(horaDespegue);
+                datosVueloInstance.setAterrizaje(aterrizaje);
+                datosVueloInstance.setPrecio(precio);
+
+                // Imprimir los datos
+                System.out.println("Hora de despegue: " + datosVueloInstance.getHoraDespegue());
+                System.out.println("Hora de aterrizaje: " + datosVueloInstance.getAterrizaje());
+                System.out.println("Precio: " + datosVueloInstance.getPrecio());
+            }
+        });
+        jButton5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtener los datos de los JLabels
+                String horaDespegue = jLabel31.getText();
+                String aterrizaje = jLabel32.getText();
+                String precio = jLabel35.getText();
+
+                // Almacenar los datos en la instancia de datosVuelo
+                datosVueloInstance.setHoraDespegue(horaDespegue);
+                datosVueloInstance.setAterrizaje(aterrizaje);
+                datosVueloInstance.setPrecio(precio);
+
+                // Imprimir los datos
+                System.out.println("Hora de despegue: " + datosVueloInstance.getHoraDespegue());
+                System.out.println("Hora de aterrizaje: " + datosVueloInstance.getAterrizaje());
+                System.out.println("Precio: " + datosVueloInstance.getPrecio());
+            }
+        });
 
         // Usar el mapa para obtener las abreviaturas correspondientes
         String abreviaturaPuntoPartida = abreviaturas.get(puntoPartida);
@@ -485,6 +563,11 @@ public class SELECCION extends javax.swing.JFrame {
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jumuorigin/imagen/despegar (1) (1).png"))); // NOI18N
         jButton5.setBorder(javax.swing.BorderFactory.createTitledBorder("COMPRAR"));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jLabel40.setText("4");
 
@@ -613,25 +696,6 @@ public class SELECCION extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         System.out.println("1");
-        jButton2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Obtener los datos de los JLabels
-                String horaDespegue = jLabel7.getText();
-                String aterrizaje = jLabel8.getText();
-                String precio = jLabel11.getText();
-
-                // Almacenar los datos en la instancia de datosVuelo
-                datosVueloInstance.setHoraDespegue(horaDespegue);
-                datosVueloInstance.setAterrizaje(aterrizaje);
-                datosVueloInstance.setPrecio(precio);
-
-                // Imprimir los datos
-                System.out.println("Hora de despegue: " + datosVueloInstance.getHoraDespegue());
-                System.out.println("Hora de aterrizaje: " + datosVueloInstance.getAterrizaje());
-                System.out.println("Precio: " + datosVueloInstance.getPrecio());
-            }
-        });
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -642,12 +706,16 @@ public class SELECCION extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
+        System.out.println("2");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
+        System.out.println("3");
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        System.out.println("4");
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments

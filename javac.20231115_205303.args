@@ -1,0 +1,18 @@
+-d
+/Users/macbookpro/Desktop/JUMUORIGIN/build/classes
+-classpath
+"/Users/macbookpro/Desktop/JUMUORIGIN/build/classes:/Applications/NetBeans/Apache NetBeans 16.app/Contents/Resources/NetBeans/netbeans/java/modules/ext/AbsoluteLayout.jar:/Users/macbookpro/Desktop/JUMUORIGIN/jcalendar-1.4.jar"
+-sourcepath
+/Users/macbookpro/Desktop/JUMUORIGIN/build/empty
+-target
+17
+-encoding
+UTF-8
+-g
+-processorpath
+"/Applications/NetBeans/Apache NetBeans 16.app/Contents/Resources/NetBeans/netbeans/java/modules/ext/AbsoluteLayout.jar:/Users/macbookpro/Desktop/JUMUORIGIN/jcalendar-1.4.jar:/Users/macbookpro/Desktop/JUMUORIGIN/build/empty"
+-s
+/Users/macbookpro/Desktop/JUMUORIGIN/build/generated-sources/ap-source-output
+-source
+17
+/Users/macbookpro/Desktop/JUMUORIGIN/src/jumuorigin/SELECCION.java

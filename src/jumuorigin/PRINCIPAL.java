@@ -43,7 +43,6 @@ public class PRINCIPAL extends javax.swing.JFrame {
     private String claseVuelo;
     private Date fecha;
 
-    
     public class datosVuelo {
 
         private String puntoPartida;
@@ -53,11 +52,9 @@ public class PRINCIPAL extends javax.swing.JFrame {
         private String horaDespegue;
         private String aterrizaje;
         private String precio;
-        
+
         // Agrega aquí cualquier otro dato que necesites almacenar
-
         // Métodos getter y setter para cada variable
-
         public String getPuntoPartida() {
             return puntoPartida;
         }
@@ -114,13 +111,11 @@ public class PRINCIPAL extends javax.swing.JFrame {
             this.precio = precio;
         }
 
-
     }
 
     public datosVuelo crearDatosVuelo() {
         return new datosVuelo();
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
