@@ -20,6 +20,7 @@ public class PRINCIPAL extends javax.swing.JFrame {
 
     datosVuelo datosVueloInstance = new datosVuelo();
     private String nombreUsuario;
+    private String csvFileName;
 
     /**
      * Creates new form PRINCIPAL
@@ -41,6 +42,8 @@ public class PRINCIPAL extends javax.swing.JFrame {
         initComponents();
         jLabel7.setText(nombreUsuario);
         this.nombreUsuario = nombreUsuario; // Almacena el nombreUsuario en el campo
+        this.csvFileName = "data/" + nombreUsuario + ".csv";
+        
         // También inicializar el mapa en este constructor
         abreviaturas = new HashMap<>();
         abreviaturas.put("BOGOTA", "BOG");
@@ -52,7 +55,11 @@ public class PRINCIPAL extends javax.swing.JFrame {
     }
  public String getNombreUsuario() {
     return this.nombreUsuario;
+  
 }
+ public String getCsvFileName() {
+        return csvFileName; // Devolver la ruta del archivo CSV
+    }
 
 
     
@@ -363,7 +370,8 @@ public class PRINCIPAL extends javax.swing.JFrame {
         datosVueloInstance.setFecha(fecha); 
         
 
-        SELECCION newframe = new SELECCION(puntoPartida, destino, abreviaturas, datosVueloInstance);
+        SELECCION newframe = new SELECCION(puntoPartida, destino, abreviaturas, datosVueloInstance, this );
+        
         newframe.setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 

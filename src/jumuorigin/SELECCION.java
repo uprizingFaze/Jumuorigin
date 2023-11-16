@@ -23,12 +23,16 @@ public class SELECCION extends javax.swing.JFrame {
     //Algo para un commit ignorar
 
     PRINCIPAL.datosVuelo datosVueloInstance;
+    private CsvManager csvManager; // El manager para las operaciones del CSV
+    private PRINCIPAL paginaPrincipal;
 
-    public SELECCION(String puntoPartida, String destino, Map<String, String> abreviaturas, PRINCIPAL.datosVuelo datosVuelo) {
+    public SELECCION(String puntoPartida, String destino, Map<String, String> abreviaturas, PRINCIPAL.datosVuelo datosVuelo, PRINCIPAL paginaPrincipal) {
         initComponents();
 
         // Inicializar datosVueloInstance
         datosVueloInstance = datosVuelo;
+        this.paginaPrincipal = paginaPrincipal;
+        
 
         jButton2.addActionListener(new ActionListener() {
             @Override
@@ -48,12 +52,16 @@ public class SELECCION extends javax.swing.JFrame {
                 System.out.println("Hora de aterrizaje: " + datosVueloInstance.getAterrizaje());
                 System.out.println("Precio: " + datosVueloInstance.getPrecio());
 
-                // Crear una nueva ventana DETALLADO y mostrarla
-                DETALLADO detallado = new DETALLADO(datosVueloInstance);
-                detallado.setVisible(true);
+
+        // Crear una nueva ventana DETALLADO
+        DETALLADO detallado = new DETALLADO(datosVueloInstance, paginaPrincipal);
+
+        // Mostrar la ventana DETALLADO
+        detallado.setVisible(true);
+                
             }
         });
-    
+
 
         jButton3.addActionListener(new ActionListener() {
             @Override
@@ -72,9 +80,13 @@ public class SELECCION extends javax.swing.JFrame {
                 System.out.println("Hora de despegue: " + datosVueloInstance.getHoraDespegue());
                 System.out.println("Hora de aterrizaje: " + datosVueloInstance.getAterrizaje());
                 System.out.println("Precio: " + datosVueloInstance.getPrecio());
-                // Crear una nueva ventana DETALLADO y mostrarla
-                DETALLADO detallado = new DETALLADO(datosVueloInstance);
+
+                // Crear una nueva ventana DETALLADO
+                DETALLADO detallado = new DETALLADO(datosVueloInstance, paginaPrincipal);
+
+                // Mostrar la ventana DETALLADO
                 detallado.setVisible(true);
+
             }
         });
 
@@ -95,9 +107,11 @@ public class SELECCION extends javax.swing.JFrame {
                 System.out.println("Hora de despegue: " + datosVueloInstance.getHoraDespegue());
                 System.out.println("Hora de aterrizaje: " + datosVueloInstance.getAterrizaje());
                 System.out.println("Precio: " + datosVueloInstance.getPrecio());
-                // Crear una nueva ventana DETALLADO y mostrarla
-                DETALLADO detallado = new DETALLADO(datosVueloInstance);
-                detallado.setVisible(true);
+    // Crear una nueva ventana DETALLADO
+    DETALLADO detallado = new DETALLADO(datosVueloInstance, paginaPrincipal);
+
+    // Mostrar la ventana DETALLADO
+    detallado.setVisible(true);
             }
         });
         jButton5.addActionListener(new ActionListener() {
@@ -117,9 +131,11 @@ public class SELECCION extends javax.swing.JFrame {
                 System.out.println("Hora de despegue: " + datosVueloInstance.getHoraDespegue());
                 System.out.println("Hora de aterrizaje: " + datosVueloInstance.getAterrizaje());
                 System.out.println("Precio: " + datosVueloInstance.getPrecio());
-                // Crear una nueva ventana DETALLADO y mostrarla
-                DETALLADO detallado = new DETALLADO(datosVueloInstance);
-                detallado.setVisible(true);
+    // Crear una nueva ventana DETALLADO
+    DETALLADO detallado = new DETALLADO(datosVueloInstance, paginaPrincipal);
+
+    // Mostrar la ventana DETALLADO
+    detallado.setVisible(true);
             }
         });
 
@@ -208,6 +224,9 @@ public class SELECCION extends javax.swing.JFrame {
         jLabel27.setText(String.valueOf(precios.get(2))+" USD");
         jLabel35.setText(String.valueOf(precios.get(3))+" USD");
 
+    }
+    public void setCsvManager(CsvManager csvManager) {
+        this.csvManager = csvManager; // Guarda la instancia de CsvManager
     }
 
     public SELECCION() {

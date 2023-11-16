@@ -6,19 +6,18 @@ package jumuorigin;
 
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import javax.swing.JOptionPane;
-/**
 
 /**
+ *
+ * /**
  *
  * @author julia
  */
 public class INICIARSESION extends javax.swing.JFrame {
 
-    
-    
-    
     public INICIARSESION() {
         initComponents();
     }
@@ -206,39 +205,49 @@ public class INICIARSESION extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-         // TODO add your handling code here:
-    String correo = jTextField1.getText();
-    String contrasena = jTextField2.getText();
-    String nombreUsuario = null;
+        // TODO add your handling code here:
+        String correo = jTextField1.getText();
+        String contrasena = jTextField2.getText();
+        String nombreUsuario = null;
 
-    try {
-        BufferedReader reader = new BufferedReader(new FileReader("datos.csv"));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            String[] parts = line.split(",");
-            if (parts[3].equals(correo) && parts[4].equals(contrasena)) {
-                // Iniciar sesión
-                JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
-                nombreUsuario = parts[1]; // Guardar el nombre del usuario
-                break;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("datos.csv"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts[3].equals(correo) && parts[4].equals(contrasena)) {
+                    // Iniciar sesión
+                    JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
+                    nombreUsuario = parts[1]; // Guardar el nombre del usuario
+                    break;
+                }
             }
+            if (nombreUsuario != null) {
+                // Redirigir a la página principal
+                PRINCIPAL paginaPrincipal = new PRINCIPAL(nombreUsuario);
+                paginaPrincipal.setVisible(true);
+
+                // Crear un archivo CSV para este usuario en una carpeta específica
+                File directory = new File("data"); // Reemplaza "carpeta" con el nombre de tu carpeta
+                if (!directory.exists()) {
+                    directory.mkdir(); // Crea la carpeta si no existe
+                }
+                File userFile = new File(directory, nombreUsuario + ".csv");
+                if (!userFile.exists()) {
+                    userFile.createNewFile();
+                }
+            } else {
+                // Si llegamos aquí, el inicio de sesión ha fallado
+                JOptionPane.showMessageDialog(null, "Error de inicio de sesión");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        if (nombreUsuario != null) {
-            // Redirigir a la página principal
-            PRINCIPAL paginaPrincipal = new PRINCIPAL(nombreUsuario);
-            paginaPrincipal.setVisible(true);
-        } else {
-            // Si llegamos aquí, el inicio de sesión ha fallado
-            JOptionPane.showMessageDialog(null, "Error de inicio de sesión");
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jTextField1ComponentAdded

@@ -37,13 +37,18 @@ public class DETALLADO extends javax.swing.JFrame {
     PRINCIPAL.datosVuelo datosVueloInstance;
     Map<Vuelo, String> videosPorVuelo;
     private String nombreUsuario;
+    private CsvManager csvManager;
+    private PRINCIPAL paginaPrincipal;
+    
 
-    public DETALLADO(PRINCIPAL.datosVuelo datosVuelo) {
+    public DETALLADO(PRINCIPAL.datosVuelo datosVuelo, PRINCIPAL paginaPrincipal) {
 
         initComponents();
+        
 
         // Almacenar la instancia de datosVuelo
         this.datosVueloInstance = datosVuelo;
+        this.paginaPrincipal = paginaPrincipal;
 
         // Establecer el texto de los jLabel
         jLabel12.setText(datosVuelo.getPuntoPartida());
@@ -90,66 +95,74 @@ public class DETALLADO extends javax.swing.JFrame {
         System.out.println("Vuelos 3");
 
     }
+        public void setCsvManager(CsvManager csvManager) {
+        this.csvManager = csvManager; // Guarda la instancia de CsvManager
+    }
 
     public String getNombreUsuario() {
         // Retorna el nombre de usuario según la lógica de tu aplicación
         // Puedes implementar lógica adicional aquí si es necesario
         return nombreUsuario;
     }
+    
+    
 
     private void guardarDatosVuelo() {
+    // Obtener los datos del vuelo
+    String puntoPartida = datosVueloInstance.getPuntoPartida();
+    String destino = datosVueloInstance.getDestino();
+    String horaDespegue = datosVueloInstance.getHoraDespegue();
+    String aterrizaje = datosVueloInstance.getAterrizaje();
+    String precio = datosVueloInstance.getPrecio();
+    String clase = datosVueloInstance.getClaseVuelo();
+    Date fecha = datosVueloInstance.getFecha();
 
-        // Obtener los datos del vuelo
-        String puntoPartida = datosVueloInstance.getPuntoPartida();
-        String destino = datosVueloInstance.getDestino();
-        String horaDespegue = datosVueloInstance.getHoraDespegue();
-        String aterrizaje = datosVueloInstance.getAterrizaje();
-        String precio = datosVueloInstance.getPrecio();
-        String clase = datosVueloInstance.getClaseVuelo();
-        Date fecha = datosVueloInstance.getFecha();
+    // Obtener la ruta del archivo CSV de la instancia de PRINCIPAL
+    String csvFileName = paginaPrincipal.getCsvFileName();
 
-        // Contar las líneas existentes en el archivo
-        int contador = 0;
-        File fileDatos = new File("datosVuelo.csv");
-        if (fileDatos.exists() && !fileDatos.isDirectory()) {
-            try {
-                Scanner scanner = new Scanner(fileDatos);
-                while (scanner.hasNextLine()) {
-                    scanner.nextLine();
-                    contador++;
-                }
-                scanner.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-
-        // Crear la cadena de datos del vuelo
-        String data =  (contador + 1) + "," + puntoPartida + "," + destino + "," + horaDespegue + "," + aterrizaje + "," + precio + "," + clase + "," + fecha + "\n";
-
-        // Escribir los datos en el archivo
+    // Contar las líneas existentes en el archivo
+    int contador = 0;
+    File fileDatos = new File(csvFileName);
+    if (fileDatos.exists() && !fileDatos.isDirectory()) {
         try {
-            FileWriter fw = new FileWriter("datosVuelo.csv", true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(data);
-            bw.close();
-        } catch (IOException e) {
+            Scanner scanner = new Scanner(fileDatos);
+            while (scanner.hasNextLine()) {
+                scanner.nextLine();
+                contador++;
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
+    // Crear la cadena de datos del vuelo
+    String data = (contador + 1) + "," + puntoPartida + "," + destino + "," + horaDespegue + "," + aterrizaje + "," + precio + "," + clase + "," + fecha + "\n";
 
-   public void mostrarVideo() {
-    System.out.println("D11");
+    // Escribir los datos en el archivo
+    try {
+        FileWriter fw = new FileWriter(csvFileName, true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        System.out.println("   csv ");
+        System.out.println("Datos: "+ csvFileName);
+        bw.write(data);
+        bw.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
 
-    // Obtener el video correspondiente al vuelo
-    String video = videosPorVuelo.get(new Vuelo(datosVueloInstance.getPuntoPartida(), datosVueloInstance.getDestino()));
-    File videoFile = new File(video);
-    URI videoUri = videoFile.toURI();
-    System.out.println("Video: " + video);
-    System.out.println("URI: " + videoUri);
+    public void mostrarVideo() {
+        System.out.println("D11");
 
-    JFXPanel jfxPanel = new JFXPanel();
+        // Obtener el video correspondiente al vuelo
+        String video = videosPorVuelo.get(new Vuelo(datosVueloInstance.getPuntoPartida(), datosVueloInstance.getDestino()));
+        File videoFile = new File(video);
+        URI videoUri = videoFile.toURI();
+        System.out.println("Video: " + video);
+        System.out.println("URI: " + videoUri);
+
+        JFXPanel jfxPanel = new JFXPanel();
     Platform.runLater(() -> {
         Media media = new Media(videoUri.toString());
         MediaPlayer player = new MediaPlayer(media);
