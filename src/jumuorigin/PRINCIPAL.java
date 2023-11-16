@@ -17,6 +17,8 @@ public class PRINCIPAL extends javax.swing.JFrame {
 
     // Declarar el mapa como una variable de instancia
     private Map<String, String> abreviaturas;
+    
+        datosVuelo datosVueloInstance = new datosVuelo();
 
     /**
      * Creates new form PRINCIPAL
@@ -338,18 +340,15 @@ public class PRINCIPAL extends javax.swing.JFrame {
         claseVuelo = jComboBox3.getSelectedItem().toString();
         fecha = jDateChooser2.getDate();
 
-        SELECCION newframe = new SELECCION();
+        // Establecer los valores en datosVueloInstance
+        datosVueloInstance.setPuntoPartida(puntoPartida);
+        datosVueloInstance.setDestino(destino);
+        datosVueloInstance.setClaseVuelo(claseVuelo);
+        datosVueloInstance.setFecha(fecha);
+
+        SELECCION newframe = new SELECCION(puntoPartida, destino, abreviaturas, datosVueloInstance);
         newframe.setVisible(true);
         this.dispose();
-
-        // Instanciar la clase SELECCION y pasar los valores de punto de partida y destino, y el mapa de abreviaturas
-        SELECCION seleccion = new SELECCION(puntoPartida, destino, abreviaturas);
-        seleccion.setVisible(true);
-        datosVuelo datosVuelo = new datosVuelo();
-        datosVuelo.setPuntoPartida(jComboBox1.getSelectedItem().toString());
-        datosVuelo.setDestino(jComboBox2.getSelectedItem().toString());
-        datosVuelo.setClaseVuelo(jComboBox3.getSelectedItem().toString());
-        datosVuelo.setFecha(jDateChooser2.getDate());
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed

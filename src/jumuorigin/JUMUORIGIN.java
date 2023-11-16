@@ -15,6 +15,8 @@ public class JUMUORIGIN {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        PRINCIPAL principal = new PRINCIPAL();
+        principal.setVisible(true);
     }
     
 }

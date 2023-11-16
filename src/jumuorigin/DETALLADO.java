@@ -26,7 +26,7 @@ public class DETALLADO extends javax.swing.JFrame {
         jLabel15.setText(datosVuelo.getAterrizaje());
 
         // Establecer el texto del jButton
-        jButton2.setText(datosVuelo.getPrecio());
+       jButton2.setText("Precio: " + datosVuelo.getPrecio());
     }
 
     public DETALLADO() {
@@ -110,7 +110,7 @@ public class DETALLADO extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jumuorigin/imagen/ruta-de-vuelo (1) (1) (1).png"))); // NOI18N
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jumuorigin/imagen/despegar (1) (1) (1).png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jumuorigin/imagen/despegar (1) (1).png"))); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("CIUDAD ORIGEN");
@@ -142,6 +142,7 @@ public class DETALLADO extends javax.swing.JFrame {
         );
 
         jButton2.setText("AQUI DIRIA PARA COMPRAR EL BOLETO O IMPRIMIRLO");
+        jButton2.setToolTipText("");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -178,7 +179,9 @@ public class DETALLADO extends javax.swing.JFrame {
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel9)
                                         .addComponent(jLabel8)))
-                                .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addGap(55, 55, 55)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(72, 72, 72)
                                 .addComponent(jLabel12)

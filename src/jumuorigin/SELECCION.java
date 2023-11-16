@@ -23,14 +23,11 @@ public class SELECCION extends javax.swing.JFrame {
 
     PRINCIPAL.datosVuelo datosVueloInstance;
 
-    public SELECCION(String puntoPartida, String destino, Map<String, String> abreviaturas) {
+    public SELECCION(String puntoPartida, String destino, Map<String, String> abreviaturas, PRINCIPAL.datosVuelo datosVuelo) {
         initComponents();
 
-        // Crear una instancia de PRINCIPAL
-        PRINCIPAL principal = new PRINCIPAL();
-
         // Inicializar datosVueloInstance
-        datosVueloInstance = principal.crearDatosVuelo();
+        datosVueloInstance = datosVuelo;
 
         jButton2.addActionListener(new ActionListener() {
             @Override
@@ -40,7 +37,7 @@ public class SELECCION extends javax.swing.JFrame {
                 String aterrizaje = jLabel8.getText();
                 String precio = jLabel11.getText();
 
-                // Almacenar los datos en la instancia de datosVuelo
+                // Establecer los valores en datosVueloInstance
                 datosVueloInstance.setHoraDespegue(horaDespegue);
                 datosVueloInstance.setAterrizaje(aterrizaje);
                 datosVueloInstance.setPrecio(precio);
@@ -49,11 +46,13 @@ public class SELECCION extends javax.swing.JFrame {
                 System.out.println("Hora de despegue: " + datosVueloInstance.getHoraDespegue());
                 System.out.println("Hora de aterrizaje: " + datosVueloInstance.getAterrizaje());
                 System.out.println("Precio: " + datosVueloInstance.getPrecio());
+
                 // Crear una nueva ventana DETALLADO y mostrarla
                 DETALLADO detallado = new DETALLADO(datosVueloInstance);
                 detallado.setVisible(true);
             }
         });
+    
 
         jButton3.addActionListener(new ActionListener() {
             @Override
@@ -203,10 +202,10 @@ public class SELECCION extends javax.swing.JFrame {
         Collections.sort(precios);
 
 // Asignar cada precio a un JLabel
-        jLabel11.setText(String.valueOf(precios.get(0)));
-        jLabel19.setText(String.valueOf(precios.get(1)));
-        jLabel27.setText(String.valueOf(precios.get(2)));
-        jLabel35.setText(String.valueOf(precios.get(3)));
+        jLabel11.setText(String.valueOf(precios.get(0))+" USD");
+        jLabel19.setText(String.valueOf(precios.get(1))+" USD");
+        jLabel27.setText(String.valueOf(precios.get(2))+" USD");
+        jLabel35.setText(String.valueOf(precios.get(3))+" USD");
 
     }
 
@@ -707,9 +706,7 @@ public class SELECCION extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         System.out.println("1");
-        DETALLADO newframe = new DETALLADO();
-        newframe.setVisible(true);
-        this.dispose();
+  
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -721,23 +718,17 @@ public class SELECCION extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         System.out.println("2");
-        DETALLADO newframe = new DETALLADO();
-        newframe.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         System.out.println("3");
-        DETALLADO newframe = new DETALLADO();
-        newframe.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         System.out.println("4");
-        DETALLADO newframe = new DETALLADO();
-        newframe.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
