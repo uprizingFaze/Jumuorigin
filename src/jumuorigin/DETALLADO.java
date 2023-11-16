@@ -4,6 +4,24 @@
  */
 package jumuorigin;
 
+import java.awt.BorderLayout;
+import java.io.File;
+import java.net.URI;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.scene.Group;
+
+import javax.swing.*;
+
 /**
  *
  * @author julia
@@ -11,6 +29,7 @@ package jumuorigin;
 public class DETALLADO extends javax.swing.JFrame {
 
     PRINCIPAL.datosVuelo datosVueloInstance;
+    Map<Vuelo, String> videosPorVuelo;
 
     public DETALLADO(PRINCIPAL.datosVuelo datosVuelo) {
         initComponents();
@@ -26,7 +45,75 @@ public class DETALLADO extends javax.swing.JFrame {
 
         // Establecer el texto del jButton
         jButton2.setText("Precio: " + datosVuelo.getPrecio());
+        System.out.println("Price");
+        // Inicializar el mapa de videos
+        videosPorVuelo = new HashMap<>();
+        
+        System.out.println("Vuelos 1");
+
+        // Aquí debes agregar todos los videos correspondientes a cada combinación de vuelo
+        videosPorVuelo.put(new Vuelo("CARTAGENA", "SANTA MARTA"), "jumuorigin/videos/CARTAGENA-SANTAMARTA.mp4");
+        videosPorVuelo.put(new Vuelo("CARTAGENA", "CALI"), "/jumuorigin/videos/CARTAGENA - CALI.mp4");
+        videosPorVuelo.put(new Vuelo("Punto", "MEDELLIN"), "/jumuorigin/videos/CARTAGENA - MEDELLIN.mp4");
+        videosPorVuelo.put(new Vuelo("CARTAGENA", "BOGOTA"), "/jumuorigin/videos/CARTAGENA - BOGOTA.mp4");
+        videosPorVuelo.put(new Vuelo("CALI", "CARTAGENA"), "/jumuorigin/videos/CALI - CARTAGENA.mp4");
+        videosPorVuelo.put(new Vuelo("CALI", "SANTA MARTA"), "/jumuorigin/videos/CALI - SANTAMARTA.mp4");
+        videosPorVuelo.put(new Vuelo("CALI", "MEDELLIN"), "/jumuorigin/videos/CALI - MEDELLIN.mp4");
+        videosPorVuelo.put(new Vuelo("CALI", "BOGOTA"), "/jumuorigin/videos/CALI - BOGOTA.mp4");
+        videosPorVuelo.put(new Vuelo("SANTA MARTA", "CARTAGENA"), "/jumuorigin/videos/SANTAMARTA - CARTAGENA.mp4");
+        videosPorVuelo.put(new Vuelo("SANTA MARTA", "CALI"), "/jumuorigin/videos/SANTAMARTA - CALI.mp4");
+        videosPorVuelo.put(new Vuelo("SANTA MARTA", "MEDELLIN"), "/jumuorigin/videos/SANTAMARTA - MEDELLIN.mp4");
+        videosPorVuelo.put(new Vuelo("SANTA MARTA", "BOGOTA"), "/jumuorigin/videos/SANTAMARTA - BOGOTA.mp4");
+        videosPorVuelo.put(new Vuelo("MEDELLIN", "CARTAGENA"), "/jumuorigin/videos/MEDELLIN - CARTAGENA.mp4");
+        videosPorVuelo.put(new Vuelo("MEDELLIN", "CALI"), "/jumuorigin/videos/MEDELLIN - CALI.mp4");
+        videosPorVuelo.put(new Vuelo("MEDELLIN", "SANTA MARTA"), "/jumuorigin/videos/MEDELLIN - SANTAMARTA.mp4");
+        videosPorVuelo.put(new Vuelo("MEDELLIN", "BOGOTA"), "/jumuorigin/videos/MEDELLIN - BOGOTA.mp4");
+        videosPorVuelo.put(new Vuelo("BOGOTA", "CARTAGENA"), "/jumuorigin/videos/BOGOTA - CARTAGENA.mp4");
+        videosPorVuelo.put(new Vuelo("BOGOTA", "CALI"), "/jumuorigin/videos/BOGOTA - CALI.mp4");
+        videosPorVuelo.put(new Vuelo("BOGOTA", "SANTA MARTA"), "/jumuorigin/videos/BOGOTA - SANTAMARTA.mp4");
+        videosPorVuelo.put(new Vuelo("BOGOTA", "MEDELLIN"), "/jumuorigin/videos/BOGOTA - MEDELLIN.mp4");
+
+        // etc.
+        System.out.println("Vuelos 2");
+        
+        System.out.println("Vuelos 3");
+
     }
+
+   public void mostrarVideo() {
+    System.out.println("D11");
+
+    // Obtener el video correspondiente al vuelo
+    String video = videosPorVuelo.get(new Vuelo(datosVueloInstance.getPuntoPartida(), datosVueloInstance.getDestino()));
+    File videoFile = new File(video);
+    URI videoUri = videoFile.toURI();
+    System.out.println("Video: " + video);
+    System.out.println("URI: " + videoUri);
+
+    JFXPanel jfxPanel = new JFXPanel();
+    Platform.runLater(() -> {
+        Media media = new Media(videoUri.toString());
+        MediaPlayer player = new MediaPlayer(media);
+        MediaView viewer = new MediaView(player);
+
+        viewer.fitWidthProperty().bind(Bindings.selectDouble(viewer.sceneProperty(), "width"));
+        viewer.fitHeightProperty().bind(Bindings.selectDouble(viewer.sceneProperty(), "height"));
+        viewer.setPreserveRatio(true);
+
+        player.play();
+        System.out.println("D22");
+        Scene scene = new Scene(new Group(viewer));
+        jfxPanel.setScene(scene);
+    });
+
+    // Agregar el reproductor de video al JPanel
+    videoPanel.setLayout(new BorderLayout());
+    videoPanel.add(jfxPanel, BorderLayout.CENTER);
+
+    // Revalidar y repintar el JPanel para asegurarte de que el reproductor de video se muestre correctamente
+    videoPanel.revalidate();
+    videoPanel.repaint();
+}
 
     public DETALLADO() {
         initComponents();
@@ -46,6 +133,7 @@ public class DETALLADO extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        videoPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -54,8 +142,6 @@ public class DETALLADO extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -102,6 +188,17 @@ public class DETALLADO extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
 
+        javax.swing.GroupLayout videoPanelLayout = new javax.swing.GroupLayout(videoPanel);
+        videoPanel.setLayout(videoPanelLayout);
+        videoPanelLayout.setHorizontalGroup(
+            videoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 289, Short.MAX_VALUE)
+        );
+        videoPanelLayout.setVerticalGroup(
+            videoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 382, Short.MAX_VALUE)
+        );
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jumuorigin/imagen/billete-de-avion (1).png"))); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -120,25 +217,6 @@ public class DETALLADO extends javax.swing.JFrame {
         jLabel8.setText("HORA");
 
         jLabel9.setText("HORA");
-
-        jLabel10.setText("AQUI VAN LOS VIDEOS");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel10)
-                .addContainerGap(42, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(jLabel10)
-                .addContainerGap(300, Short.MAX_VALUE))
-        );
 
         jButton2.setText("AQUI DIRIA PARA COMPRAR EL BOLETO O IMPRIMIRLO");
         jButton2.setToolTipText("");
@@ -165,32 +243,34 @@ public class DETALLADO extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel6))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel7)
-                                        .addComponent(jLabel5))
-                                    .addGap(39, 39, 39)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel9)
-                                        .addComponent(jLabel8)
-                                        .addComponent(jLabel13)
-                                        .addComponent(jLabel15)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                    .addGap(55, 55, 55)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(72, 72, 72)
-                                .addComponent(jLabel12))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(83, 83, 83)
-                                .addComponent(jLabel14)))
-                        .addGap(53, 53, 53)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel6))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel5))
+                                        .addGap(39, 39, 39)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel9)
+                                            .addComponent(jLabel8)
+                                            .addComponent(jLabel13)
+                                            .addComponent(jLabel15)))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(72, 72, 72)
+                                        .addComponent(jLabel12))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(83, 83, 83)
+                                        .addComponent(jLabel14)))
+                                .addGap(12, 12, 12)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(videoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -203,9 +283,7 @@ public class DETALLADO extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(63, 63, 63)
-                        .addComponent(jLabel3)
-                        .addGap(53, 53, 53)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel3))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jLabel2)
@@ -233,7 +311,10 @@ public class DETALLADO extends javax.swing.JFrame {
                             .addComponent(jLabel14)
                             .addComponent(jLabel15))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addComponent(videoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
 
@@ -310,7 +391,6 @@ public class DETALLADO extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -326,6 +406,52 @@ public class DETALLADO extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel videoPanel;
     // End of variables declaration//GEN-END:variables
+public class Vuelo {
+
+        private String partida;
+        private String destino;
+
+        public Vuelo(String partida, String destino) {
+            this.partida = partida;
+            this.destino = destino;
+        }
+
+        // getters y setters
+        public String getPartida() {
+            return partida;
+        }
+
+        public void setPartida(String partida) {
+            this.partida = partida;
+        }
+
+        public String getDestino() {
+            return destino;
+        }
+
+        public void setDestino(String destino) {
+            this.destino = destino;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Vuelo vuelo = (Vuelo) o;
+            return Objects.equals(partida, vuelo.partida)
+                    && Objects.equals(destino, vuelo.destino);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(partida, destino);
+        }
+    }
+
 }
