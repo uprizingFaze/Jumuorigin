@@ -77,6 +77,11 @@ public class DETALLADO extends javax.swing.JFrame {
         System.out.println("Vuelos 2");
         
         System.out.println("Vuelos 3");
+        System.out.println("Vuelos 3");
+
+        System.out.println("Vuelos 3");
+
+        
 
     }
 
