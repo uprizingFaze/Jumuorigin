@@ -1,4 +1,3 @@
-
 package jumuorigin;
 
 import java.awt.MediaTracker;
@@ -50,6 +49,9 @@ public class SELECCION extends javax.swing.JFrame {
                 System.out.println("Hora de despegue: " + datosVueloInstance.getHoraDespegue());
                 System.out.println("Hora de aterrizaje: " + datosVueloInstance.getAterrizaje());
                 System.out.println("Precio: " + datosVueloInstance.getPrecio());
+                // Crear una nueva ventana DETALLADO y mostrarla
+                DETALLADO detallado = new DETALLADO(datosVueloInstance);
+                detallado.setVisible(true);
             }
         });
 
@@ -70,6 +72,9 @@ public class SELECCION extends javax.swing.JFrame {
                 System.out.println("Hora de despegue: " + datosVueloInstance.getHoraDespegue());
                 System.out.println("Hora de aterrizaje: " + datosVueloInstance.getAterrizaje());
                 System.out.println("Precio: " + datosVueloInstance.getPrecio());
+                // Crear una nueva ventana DETALLADO y mostrarla
+                DETALLADO detallado = new DETALLADO(datosVueloInstance);
+                detallado.setVisible(true);
             }
         });
 
@@ -90,6 +95,9 @@ public class SELECCION extends javax.swing.JFrame {
                 System.out.println("Hora de despegue: " + datosVueloInstance.getHoraDespegue());
                 System.out.println("Hora de aterrizaje: " + datosVueloInstance.getAterrizaje());
                 System.out.println("Precio: " + datosVueloInstance.getPrecio());
+                // Crear una nueva ventana DETALLADO y mostrarla
+                DETALLADO detallado = new DETALLADO(datosVueloInstance);
+                detallado.setVisible(true);
             }
         });
         jButton5.addActionListener(new ActionListener() {
@@ -109,6 +117,9 @@ public class SELECCION extends javax.swing.JFrame {
                 System.out.println("Hora de despegue: " + datosVueloInstance.getHoraDespegue());
                 System.out.println("Hora de aterrizaje: " + datosVueloInstance.getAterrizaje());
                 System.out.println("Precio: " + datosVueloInstance.getPrecio());
+                // Crear una nueva ventana DETALLADO y mostrarla
+                DETALLADO detallado = new DETALLADO(datosVueloInstance);
+                detallado.setVisible(true);
             }
         });
 
@@ -696,6 +707,9 @@ public class SELECCION extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         System.out.println("1");
+        DETALLADO newframe = new DETALLADO();
+        newframe.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -707,14 +721,23 @@ public class SELECCION extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         System.out.println("2");
+        DETALLADO newframe = new DETALLADO();
+        newframe.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         System.out.println("3");
+        DETALLADO newframe = new DETALLADO();
+        newframe.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         System.out.println("4");
+        DETALLADO newframe = new DETALLADO();
+        newframe.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
