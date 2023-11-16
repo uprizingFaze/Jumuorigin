@@ -7,6 +7,7 @@ package jumuorigin;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,15 +42,18 @@ public class PRINCIPAL extends javax.swing.JFrame {
     private String destino;
     private String claseVuelo;
     private Date fecha;
+
     
-    
-    
-    public class DatosVuelo {
+    public class datosVuelo {
 
         private String puntoPartida;
         private String destino;
         private String claseVuelo;
         private Date fecha;
+        private String horaDespegue;
+        private String aterrizaje;
+        private String precio;
+        
         // Agrega aquí cualquier otro dato que necesites almacenar
 
         // Métodos getter y setter para cada variable
@@ -85,8 +89,38 @@ public class PRINCIPAL extends javax.swing.JFrame {
         public void setFecha(Date fecha) {
             this.fecha = fecha;
         }
-        
+
+        public String getHoraDespegue() {
+            return horaDespegue;
+        }
+
+        public void setHoraDespegue(String horaDespegue) {
+            this.horaDespegue = horaDespegue;
+        }
+
+        public String getAterrizaje() {
+            return aterrizaje;
+        }
+
+        public void setAterrizaje(String aterrizaje) {
+            this.aterrizaje = aterrizaje;
+        }
+
+        public String getPrecio() {
+            return precio;
+        }
+
+        public void setPrecio(String precio) {
+            this.precio = precio;
+        }
+
+
     }
+
+    public datosVuelo crearDatosVuelo() {
+        return new datosVuelo();
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -316,7 +350,7 @@ public class PRINCIPAL extends javax.swing.JFrame {
         // Instanciar la clase SELECCION y pasar los valores de punto de partida y destino, y el mapa de abreviaturas
         SELECCION seleccion = new SELECCION(puntoPartida, destino, abreviaturas);
         seleccion.setVisible(true);
-        DatosVuelo datosVuelo = new DatosVuelo();
+        datosVuelo datosVuelo = new datosVuelo();
         datosVuelo.setPuntoPartida(jComboBox1.getSelectedItem().toString());
         datosVuelo.setDestino(jComboBox2.getSelectedItem().toString());
         datosVuelo.setClaseVuelo(jComboBox3.getSelectedItem().toString());

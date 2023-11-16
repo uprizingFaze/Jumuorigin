@@ -1,6 +1,9 @@
 
 package jumuorigin;
+
 import java.awt.MediaTracker;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -10,18 +13,27 @@ import java.util.Map;
 import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import jumuorigin.PRINCIPAL.datosVuelo;
 
 /**
  *
  * @author julia
  */
-
-
-
 public class SELECCION extends javax.swing.JFrame {
+    // Crear una instancia de datosVuelo
+
+    PRINCIPAL.datosVuelo datosVueloInstance;
 
     public SELECCION(String puntoPartida, String destino, Map<String, String> abreviaturas) {
         initComponents();
+
+        // Crear una instancia de PRINCIPAL
+        PRINCIPAL principal = new PRINCIPAL();
+
+        // Crear una instancia de datosVuelo
+        PRINCIPAL.datosVuelo datosVueloInstance = principal.crearDatosVuelo();
+
         // Usar el mapa para obtener las abreviaturas correspondientes
         String abreviaturaPuntoPartida = abreviaturas.get(puntoPartida);
         String abreviaturaDestino = abreviaturas.get(destino);
@@ -312,6 +324,11 @@ public class SELECCION extends javax.swing.JFrame {
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jumuorigin/imagen/despegar (1) (1).png"))); // NOI18N
         jButton3.setBorder(javax.swing.BorderFactory.createTitledBorder("COMPRAR"));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel38.setText("2");
 
@@ -388,6 +405,11 @@ public class SELECCION extends javax.swing.JFrame {
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jumuorigin/imagen/despegar (1) (1).png"))); // NOI18N
         jButton4.setBorder(javax.swing.BorderFactory.createTitledBorder("COMPRAR"));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel39.setText("3");
 
@@ -590,6 +612,26 @@ public class SELECCION extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        System.out.println("1");
+        jButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtener los datos de los JLabels
+                String horaDespegue = jLabel7.getText();
+                String aterrizaje = jLabel8.getText();
+                String precio = jLabel11.getText();
+
+                // Almacenar los datos en la instancia de datosVuelo
+                datosVueloInstance.setHoraDespegue(horaDespegue);
+                datosVueloInstance.setAterrizaje(aterrizaje);
+                datosVueloInstance.setPrecio(precio);
+
+                // Imprimir los datos
+                System.out.println("Hora de despegue: " + datosVueloInstance.getHoraDespegue());
+                System.out.println("Hora de aterrizaje: " + datosVueloInstance.getAterrizaje());
+                System.out.println("Precio: " + datosVueloInstance.getPrecio());
+            }
+        });
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -598,6 +640,14 @@ public class SELECCION extends javax.swing.JFrame {
         newframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
