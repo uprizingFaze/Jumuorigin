@@ -321,9 +321,8 @@ public class PRINCIPAL extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        CHECKIN newframe = new CHECKIN();
-        newframe.setVisible(true);
-        this.dispose();
+    new CHECKIN(this).setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
