@@ -17,8 +17,9 @@ public class PRINCIPAL extends javax.swing.JFrame {
 
     // Declarar el mapa como una variable de instancia
     private Map<String, String> abreviaturas;
-    
-        datosVuelo datosVueloInstance = new datosVuelo();
+
+    datosVuelo datosVueloInstance = new datosVuelo();
+    private String nombreUsuario;
 
     /**
      * Creates new form PRINCIPAL
@@ -39,7 +40,22 @@ public class PRINCIPAL extends javax.swing.JFrame {
     public PRINCIPAL(String nombreUsuario) {
         initComponents();
         jLabel7.setText(nombreUsuario);
+        this.nombreUsuario = nombreUsuario; // Almacena el nombreUsuario en el campo
+        // También inicializar el mapa en este constructor
+        abreviaturas = new HashMap<>();
+        abreviaturas.put("BOGOTA", "BOG");
+        abreviaturas.put("MEDELLIN", "MED");
+        abreviaturas.put("SANTA MARTA", "STM");
+        abreviaturas.put("CALI", "CAL");
+        abreviaturas.put("CARTAGENA", "CRG");
+        // ...añadir más ciudades y abreviaturas aquí...
     }
+ public String getNombreUsuario() {
+    return this.nombreUsuario;
+}
+
+
+    
     private String puntoPartida;
     private String destino;
     private String claseVuelo;
@@ -344,11 +360,11 @@ public class PRINCIPAL extends javax.swing.JFrame {
         datosVueloInstance.setPuntoPartida(puntoPartida);
         datosVueloInstance.setDestino(destino);
         datosVueloInstance.setClaseVuelo(claseVuelo);
-        datosVueloInstance.setFecha(fecha);
+        datosVueloInstance.setFecha(fecha); 
+        
 
         SELECCION newframe = new SELECCION(puntoPartida, destino, abreviaturas, datosVueloInstance);
         newframe.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed

@@ -5,12 +5,18 @@
 package jumuorigin;
 
 import java.awt.BorderLayout;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Scanner;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.embed.swing.JFXPanel;
@@ -30,8 +36,10 @@ public class DETALLADO extends javax.swing.JFrame {
 
     PRINCIPAL.datosVuelo datosVueloInstance;
     Map<Vuelo, String> videosPorVuelo;
+    private String nombreUsuario;
 
     public DETALLADO(PRINCIPAL.datosVuelo datosVuelo) {
+
         initComponents();
 
         // Almacenar la instancia de datosVuelo
@@ -48,7 +56,7 @@ public class DETALLADO extends javax.swing.JFrame {
         System.out.println("Price");
         // Inicializar el mapa de videos
         videosPorVuelo = new HashMap<>();
-        
+
         System.out.println("Vuelos 1");
 
         // Aquí debes agregar todos los videos correspondientes a cada combinación de vuelo
@@ -75,15 +83,61 @@ public class DETALLADO extends javax.swing.JFrame {
 
         // etc.
         System.out.println("Vuelos 2");
-        
+
         System.out.println("Vuelos 3");
         System.out.println("Vuelos 3");
 
         System.out.println("Vuelos 3");
-
-        
 
     }
+
+    public String getNombreUsuario() {
+        // Retorna el nombre de usuario según la lógica de tu aplicación
+        // Puedes implementar lógica adicional aquí si es necesario
+        return nombreUsuario;
+    }
+
+    private void guardarDatosVuelo() {
+
+        // Obtener los datos del vuelo
+        String puntoPartida = datosVueloInstance.getPuntoPartida();
+        String destino = datosVueloInstance.getDestino();
+        String horaDespegue = datosVueloInstance.getHoraDespegue();
+        String aterrizaje = datosVueloInstance.getAterrizaje();
+        String precio = datosVueloInstance.getPrecio();
+        String clase = datosVueloInstance.getClaseVuelo();
+        Date fecha = datosVueloInstance.getFecha();
+
+        // Contar las líneas existentes en el archivo
+        int contador = 0;
+        File fileDatos = new File("datosVuelo.csv");
+        if (fileDatos.exists() && !fileDatos.isDirectory()) {
+            try {
+                Scanner scanner = new Scanner(fileDatos);
+                while (scanner.hasNextLine()) {
+                    scanner.nextLine();
+                    contador++;
+                }
+                scanner.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Crear la cadena de datos del vuelo
+        String data =  (contador + 1) + "," + puntoPartida + "," + destino + "," + horaDespegue + "," + aterrizaje + "," + precio + "," + clase + "," + fecha + "\n";
+
+        // Escribir los datos en el archivo
+        try {
+            FileWriter fw = new FileWriter("datosVuelo.csv", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(data);
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
    public void mostrarVideo() {
     System.out.println("D11");
@@ -119,10 +173,15 @@ public class DETALLADO extends javax.swing.JFrame {
     videoPanel.revalidate();
     videoPanel.repaint();
 }
+   public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+   
 
     public DETALLADO() {
         initComponents();
     }
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -350,11 +409,30 @@ public class DETALLADO extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        System.out.println("Punto de partida: " + datosVueloInstance.getPuntoPartida());
-        System.out.println("Destino: " + datosVueloInstance.getDestino());
-        System.out.println("Hora de despegue: " + datosVueloInstance.getHoraDespegue());
-        System.out.println("Hora de aterrizaje: " + datosVueloInstance.getAterrizaje());
-        System.out.println("Precio: " + datosVueloInstance.getPrecio());
+
+         // Construir la cadena con los datos del vuelo
+    String datosVueloStr = "Punto de partida: " + datosVueloInstance.getPuntoPartida() + "\n"
+        + "Destino: " + datosVueloInstance.getDestino() + "\n"
+        + "Hora de despegue: " + datosVueloInstance.getHoraDespegue() + "\n"
+        + "Hora de aterrizaje: " + datosVueloInstance.getAterrizaje() + "\n"
+        + "Precio: " + datosVueloInstance.getPrecio() + "\n"
+            +"Clase: " + datosVueloInstance.getClaseVuelo() + "\n"
+            +"Fechas: " + datosVueloInstance.getFecha();
+
+    // Crear los botones
+    Object[] options = {"OK", "No"};
+
+    // Mostrar los datos en un JOptionPane con botones personalizados
+    int option = JOptionPane.showOptionDialog(null, datosVueloStr, "Recibo", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+
+    // Aquí puedes manejar la opción seleccionada por el usuario
+    if (option == 0) {
+        // El usuario hizo clic en "OK"
+        guardarDatosVuelo();
+    } else if (option == 1) {
+        // El usuario hizo clic en "No"
+    }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -460,3 +538,4 @@ public class Vuelo {
     }
 
 }
+
