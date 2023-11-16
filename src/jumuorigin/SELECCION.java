@@ -20,6 +20,7 @@ import jumuorigin.PRINCIPAL.datosVuelo;
  */
 public class SELECCION extends javax.swing.JFrame {
     // Crear una instancia de datosVuelo
+    //Algo para un commit ignorar
 
     PRINCIPAL.datosVuelo datosVueloInstance;
 
